@@ -8,6 +8,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { SafeImage } from "@/components/shared/safe-image";
 import { useCart } from "@/context/cart-context";
 import { formatPrice } from "@/lib/utils";
+import { useAuth } from "@/context/auth-context";
 
 export function CartView() {
   const {
@@ -20,6 +21,9 @@ export function CartView() {
     removeItem,
     clearCart,
   } = useCart();
+
+    const { user } = useAuth();
+  const checkoutHref = user ? "/checkout" : "/login?redirect=%2Fcheckout";
 
   
   if (!isReady) {
@@ -141,7 +145,7 @@ export function CartView() {
 
         <div className="space-y-2">
           <Button asChild className="w-full" size="lg">
-            <Link href="/checkout">Proceed to Checkout</Link>
+                        <Link href={checkoutHref}>Proceed to Checkout</Link>
           </Button>
           <Button asChild variant="outline" className="w-full">
             <Link href="/products">Continue shopping</Link>

@@ -14,6 +14,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ThemeToggle } from "./theme-toggle";
+import { UserMenu, MobileAuthButtons } from "@/components/auth/user-menu";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -71,9 +72,9 @@ export function Header() {
 
           <ThemeToggle />
 
-          <Button asChild size="sm" className="hidden md:inline-flex">
-            <Link href="/login">Log In</Link>
-          </Button>
+                    <div className="hidden md:block">
+            <UserMenu />
+          </div>
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -103,11 +104,7 @@ export function Header() {
                     {link.label}
                   </Link>
                 ))}
-                <Button asChild className="mt-4">
-                  <Link href="/login" onClick={() => setOpen(false)}>
-                    Log In
-                  </Link>
-                </Button>
+                                <MobileAuthButtons onNavigate={() => setOpen(false)} />
               </nav>
             </SheetContent>
           </Sheet>
