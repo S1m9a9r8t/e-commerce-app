@@ -28,8 +28,8 @@ export async function apiFetch<T>(
   const hasAuth = Object.keys(headers).some(
     (key) => key.toLowerCase() === "authorization"
   );
-  const canCache = method === "GET" && !hasAuth;
-
+   const canCache =
+    method === "GET" && !hasAuth && options.cache !== "no-store";
   let response: Response;
   try {
     response = await fetch(`${API_URL}${path}`, {
