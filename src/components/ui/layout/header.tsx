@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, ShoppingCart } from "lucide-react";
+import { useCart } from "@/context/cart-context";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -24,8 +25,8 @@ export function Header() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
 
-  // Temporary: we connect this to the real cart in the cart phase
-  const cartCount = 0;
+    const { totalItems, isReady } = useCart();
+  const cartCount = isReady ? totalItems : 0;
 
   function isActive(href: string) {
     return href === "/" ? pathname === "/" : pathname.startsWith(href);

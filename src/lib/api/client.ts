@@ -18,14 +18,26 @@ export async function apiFetch<T>(
     throw new Error("NEXT_PUBLIC_API_URL is not set in .env.local");
   }
 
+  const method = (options.method ?? "GET").toUpperCase();
+
+  const headers: Record<string, string> = {
+    ...(options.body ? { "Content-Type": "application/json" } : {}),
+    ...(options.headers as Record<string, string>),
+  };
+
+  const hasAuth = Object.keys(headers).some(
+    (key) => key.toLowerCase() === "authorization"
+  );
+  const canCache = method === "GET" && !hasAuth;
+
   let response: Response;
   try {
     response = await fetch(`${API_URL}${path}`, {
+      ...(canCache
+        ? { next: { revalidate: 60 } }
+        : { cache: "no-store" as const }),
       ...options,
-      headers: {
-        "Content-Type": "application/json",
-        ...(options.headers as Record<string, string>),
-      },
+      headers,
     });
   } catch {
     throw new ApiError("Network error. Please check your connection.", 0);
@@ -41,7 +53,7 @@ export async function apiFetch<T>(
           : data.message;
       }
     } catch {
-      // response had no JSON body, keep the default message
+
     }
     throw new ApiError(message, response.status);
   }

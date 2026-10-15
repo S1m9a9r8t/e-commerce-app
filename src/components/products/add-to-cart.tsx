@@ -1,18 +1,22 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCart } from "@/context/cart-context";
 import type { Product } from "@/types";
 
 const MAX_QUANTITY = 99;
 
 export function AddToCart({ product }: { product: Product }) {
+  const { addItem } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
 
   function handleAdd() {
-    // TODO (cart phase): add `product` with `quantity` to the cart
-    console.log("Add to cart (not connected yet):", product.id, quantity);
+    addItem(product, quantity);
+    setAdded(true);
   }
 
   return (
@@ -52,6 +56,15 @@ export function AddToCart({ product }: { product: Product }) {
       <Button size="lg" className="w-full sm:w-auto" onClick={handleAdd}>
         Add to Cart
       </Button>
+
+      {added && (
+        <p role="status" className="text-sm text-muted-foreground">
+          Added to your cart.{" "}
+          <Link href="/cart" className="text-brand hover:underline">
+            View cart
+          </Link>
+        </p>
+      )}
     </div>
   );
 }

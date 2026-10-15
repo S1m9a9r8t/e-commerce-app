@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { SafeImage } from "@/components/shared/safe-image";
+import { QuickAddButton } from "./quick-add-button";
 import { formatPrice } from "@/lib/utils";
 import type { Product } from "@/types";
 
@@ -22,7 +23,10 @@ export function ProductCard({ product }: { product: Product }) {
             {product.title}
           </Link>
         </h3>
-        <p className="font-semibold">{formatPrice(product.price)}</p>
+        <div className="flex items-center justify-between pt-1">
+          <p className="font-semibold">{formatPrice(product.price)}</p>
+          <QuickAddButton product={product} />
+        </div>
       </div>
     </div>
   );

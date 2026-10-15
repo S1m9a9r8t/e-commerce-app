@@ -184,8 +184,8 @@ export function ProductsBrowser({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="newest">Oldest first</SelectItem>
-              <SelectItem value="oldest">Newest first</SelectItem>
+              <SelectItem value="oldest">Oldest first</SelectItem>
+              <SelectItem value="newest">Newest first</SelectItem>
               <SelectItem value="price-asc">Price: low to high</SelectItem>
               <SelectItem value="price-desc">Price: high to low</SelectItem>
               <SelectItem value="name-asc">Name: A to Z</SelectItem>
