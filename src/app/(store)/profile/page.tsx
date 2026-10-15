@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LastOrderCard } from "@/components/auth/last-order-card";
 import { ProfileView } from "@/components/auth/profile-view";
 import { RequireAuth } from "@/components/auth/require-auth";
 
@@ -13,6 +14,7 @@ export default function ProfilePage() {
       <h1 className="text-3xl font-bold tracking-tight">My Profile</h1>
       <RequireAuth>
         <ProfileView />
+        <LastOrderCard />
       </RequireAuth>
     </div>
   );

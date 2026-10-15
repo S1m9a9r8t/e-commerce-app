@@ -61,3 +61,10 @@ export interface CheckoutFormData {
   address: string;
   city: string;
 }
+
+export interface SimulatedOrder {
+  items: CartItem[];
+  customer: CheckoutFormData;
+  total: number;
+  placedAt: string;
+}
