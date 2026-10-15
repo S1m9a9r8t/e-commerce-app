@@ -15,7 +15,7 @@ import {
 import { useAuth } from "@/context/auth-context";
 import { cleanImageUrl } from "@/lib/utils";
 
-function getInitials(name: string) {
+export function getInitials(name: string) {
   return (
     name
       .split(" ")

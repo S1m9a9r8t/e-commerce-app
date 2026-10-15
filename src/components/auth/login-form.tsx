@@ -17,19 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/context/auth-context";
 import { ApiError } from "@/lib/api/client";
-
-// Only allow redirects inside our own site
-function getSafeRedirect(value: string | null) {
-  if (
-    value &&
-    value.startsWith("/") &&
-    !value.startsWith("//") &&
-    !value.startsWith("/\\")
-  ) {
-    return value;
-  }
-  return "/";
-}
+import { getSafeRedirect } from "@/lib/utils";
 
 export function LoginForm() {
   const router = useRouter();

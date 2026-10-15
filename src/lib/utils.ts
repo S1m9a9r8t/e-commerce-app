@@ -11,3 +11,16 @@ export function cleanImageUrl(url: string | undefined) {
   if (!url) return "";
   return url.replace(/[\[\]"]/g, "").trim();
 }
+
+// Only allow redirects inside our own site
+export function getSafeRedirect(value: string | null) {
+  if (
+    value &&
+    value.startsWith("/") &&
+    !value.startsWith("//") &&
+    !value.startsWith("/\\")
+  ) {
+    return value;
+  }
+  return "/";
+}
