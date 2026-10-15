@@ -68,3 +68,10 @@ export interface SimulatedOrder {
   total: number;
   placedAt: string;
 }
+export interface ProductPayload {
+  title: string;
+  price: number;
+  description: string;
+  categoryId: number;
+  images: string[];
+}

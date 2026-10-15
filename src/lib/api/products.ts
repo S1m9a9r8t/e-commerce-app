@@ -1,5 +1,5 @@
 import { apiFetch } from "./client";
-import type { Product } from "@/types";
+import type { Product, ProductPayload } from "@/types";
 
 export interface ProductFilters {
   offset?: number;
@@ -8,6 +8,10 @@ export interface ProductFilters {
   categoryId?: number;
   price_min?: number;
   price_max?: number;
+}
+
+function authHeaders(token?: string | null): Record<string, string> | undefined {
+  return token ? { Authorization: `Bearer ${token}` } : undefined;
 }
 
 export function getProducts(
@@ -34,4 +38,24 @@ export function getProductBySlug(slug: string) {
 
 export function getRelatedProducts(id: number) {
   return apiFetch<Product[]>(`/products/${id}/related`);
+}
+
+export function createProduct(payload: ProductPayload, token?: string | null) {
+  return apiFetch<Product>("/products", {
+    method: "POST",
+    body: JSON.stringify(payload),
+    headers: authHeaders(token),
+  });
+}
+
+export function updateProduct(
+  id: number,
+  payload: ProductPayload,
+  token?: string | null
+) {
+  return apiFetch<Product>(`/products/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+    headers: authHeaders(token),
+  });
 }

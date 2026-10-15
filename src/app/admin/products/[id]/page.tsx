@@ -16,7 +16,10 @@ export const metadata: Metadata = {
 
 export const dynamic = "force-dynamic";
 
-type PageProps = { params: Promise<{ id: string }> };
+type PageProps = {
+  params: Promise<{ id: string }>;
+  searchParams: Promise<{ created?: string; updated?: string }>;
+};
 
 function formatDateTime(value: string) {
   return new Date(value).toLocaleString("en-US", {
@@ -28,8 +31,12 @@ function formatDateTime(value: string) {
   });
 }
 
-export default async function AdminProductDetailsPage({ params }: PageProps) {
+export default async function AdminProductDetailsPage({
+  params,
+  searchParams,
+}: PageProps) {
   const { id: rawId } = await params;
+  const { created, updated } = await searchParams;
   const id = Number(rawId);
 
   const notFound = (
@@ -89,6 +96,20 @@ export default async function AdminProductDetailsPage({ params }: PageProps) {
         <ArrowLeft className="size-4" />
         All products
       </Link>
+
+      
+      {(created || updated) && (
+        <Alert role="status">
+          <AlertTitle>
+            {created ? "Product created" : "Product updated"}
+          </AlertTitle>
+          <AlertDescription>
+            The API accepted your {created ? "new product" : "changes"}. Store
+            pages keep answers for up to a minute, so it may take a moment to
+            show there.
+          </AlertDescription>
+        </Alert>
+      )}
 
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
