@@ -1,8 +1,9 @@
-const STORAGE_KEY = "nexus-admin-created-products";
+const PRODUCTS_KEY = "nexus-admin-created-products";
+const CATEGORIES_KEY = "nexus-admin-created-categories";
 
-function readIds(): number[] {
+function readIds(key: string): number[] {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = localStorage.getItem(key);
     if (!raw) return [];
     const parsed: unknown = JSON.parse(raw);
     return Array.isArray(parsed)
@@ -13,17 +14,33 @@ function readIds(): number[] {
   }
 }
 
-export function addCreatedProductId(id: number) {
+function addId(key: string, id: number) {
   try {
-    const ids = readIds();
+    const ids = readIds(key);
     if (!ids.includes(id)) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify([...ids, id]));
+      localStorage.setItem(key, JSON.stringify([...ids, id]));
     }
   } catch {
-    // Storage is blocked: the product will be view-only in this browser
+    // Storage is blocked: the record will be view-only in this browser
   }
 }
 
+export function addCreatedProductId(id: number) {
+  addId(PRODUCTS_KEY, id);
+}
+
 export function isCreatedByMe(id: number) {
-  return readIds().includes(id);
+  return readIds(PRODUCTS_KEY).includes(id);
+}
+
+export function addCreatedCategoryId(id: number) {
+  addId(CATEGORIES_KEY, id);
+}
+
+export function getCreatedCategoryIds() {
+  return readIds(CATEGORIES_KEY);
+}
+
+export function isCategoryCreatedByMe(id: number) {
+  return readIds(CATEGORIES_KEY).includes(id);
 }

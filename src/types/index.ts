@@ -75,3 +75,7 @@ export interface ProductPayload {
   categoryId: number;
   images: string[];
 }
+export interface CategoryPayload {
+  name: string;
+  image: string;
+}
