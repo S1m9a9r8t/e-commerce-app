@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/sheet";
 import { ThemeToggle } from "@/components/ui/layout/theme-toggle";
 import { AdminNav } from "./admin-nav";
+import { Logo } from "@/components/ui/layout/logo";
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const [open, setOpen] = useState(false);
@@ -21,9 +22,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
     <div className="flex-1 md:grid md:grid-cols-[15rem_1fr]">
       {/* Desktop sidebar */}
       <aside className="sticky top-0 hidden h-screen flex-col border-r p-4 md:flex">
-        <Link href="/admin" className="mb-6 px-3 text-lg font-bold">
-          Nexus Admin
-        </Link>
+               <div className="mb-6 px-3">
+          <Logo href="/admin" label="Nexus Admin" />
+        </div>
         <div className="min-h-0 flex-1">
           <AdminNav />
         </div>

@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/sheet";
 import { ThemeToggle } from "./theme-toggle";
 import { UserMenu, MobileAuthButtons } from "@/components/auth/user-menu";
+import { Logo } from "./logo";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -37,9 +38,7 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b bg-background">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 md:grid md:grid-cols-[1fr_auto_1fr]">
         <div className="flex items-center gap-8 md:contents">
-          <Link href="/" className="text-lg font-bold">
-            Nexus Store
-          </Link>
+            <Logo />
 
           <nav className="hidden items-center gap-6 md:flex">
             {navLinks.map((link) => (
