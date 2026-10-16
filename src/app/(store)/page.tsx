@@ -28,7 +28,7 @@ export default async function Home() {
       <section className="grid items-center gap-10 py-4 md:grid-cols-[1fr_1.2fr] md:py-8">
         <div className="space-y-6 text-center md:text-left">
           <h1 className="text-4xl font-extrabold tracking-tight md:text-6xl">
-            Everything in one place
+           Shop smarter, live better
           </h1>
           <p className="mx-auto max-w-xl text-base text-muted-foreground md:mx-0 md:text-lg">
             Browse our catalog, search by name, and filter by category or price
@@ -117,7 +117,7 @@ export default async function Home() {
 
       {/* Call to action */}
       <section className="space-y-4 rounded-lg border bg-muted/50 p-8 text-center">
-        <h2 className="text-2xl font-bold">Ready to start shopping?</h2>
+        <h2 className="text-2xl font-bold">Find something you will love</h2>
         <p className="mx-auto max-w-md text-muted-foreground">
           Explore all our categories, search for items by name, or filter by
           price.
