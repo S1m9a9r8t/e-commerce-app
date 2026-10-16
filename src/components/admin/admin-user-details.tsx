@@ -47,8 +47,6 @@ export function AdminUserDetails({ id }: { id: number }) {
   useEffect(() => {
     let cancelled = false;
 
-    setState({ status: "loading" });
-
     getUser(id, { cache: "no-store" })
       .then((user) => {
         if (cancelled) return;
@@ -110,10 +108,13 @@ export function AdminUserDetails({ id }: { id: number }) {
         <AlertDescription className="space-y-3">
           <p>{state.message}</p>
           <div className="flex gap-2">
-            <Button
+                       <Button
               size="sm"
               variant="outline"
-              onClick={() => setAttempt((count) => count + 1)}
+              onClick={() => {
+                setState({ status: "loading" });
+                setAttempt((count) => count + 1);
+              }}
             >
               Try again
             </Button>

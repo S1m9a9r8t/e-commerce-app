@@ -77,6 +77,7 @@ export function ProductForm({ mode, categories, product }: ProductFormProps) {
 
   useEffect(() => {
     if (mode === "edit" && product) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- browser storage only exists after the page loads
       setOwned(isCreatedByMe(product.id));
     }
   }, [mode, product]);

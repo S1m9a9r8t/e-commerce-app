@@ -25,6 +25,7 @@ export function AdminCategoriesList({
 
   // Which categories this browser created is saved in the browser
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- browser storage only exists after the page loads
     setMine(getCreatedCategoryIds());
   }, []);
 
@@ -95,3 +96,5 @@ export function AdminCategoriesList({
     </ul>
   );
 }
+
+ 

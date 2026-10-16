@@ -12,6 +12,7 @@ export function LastOrderCard() {
 
   // The order is saved in the browser, so we read it after the page opens
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- browser storage only exists after the page loads
     setOrder(loadLastOrder());
   }, []);
 

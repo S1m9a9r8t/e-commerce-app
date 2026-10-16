@@ -44,6 +44,7 @@ export function CategoryForm({ mode, category }: CategoryFormProps) {
 
   useEffect(() => {
     if (mode === "edit" && category) {
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- browser storage only exists after the page loads
       setOwned(isCategoryCreatedByMe(category.id));
     }
   }, [mode, category]);
@@ -200,3 +201,5 @@ export function CategoryForm({ mode, category }: CategoryFormProps) {
     </form>
   );
 }
+
+  

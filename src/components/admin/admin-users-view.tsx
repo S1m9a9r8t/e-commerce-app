@@ -44,9 +44,6 @@ export function AdminUsersView() {
   useEffect(() => {
     let cancelled = false;
 
-    setUsers(null);
-    setError(null);
-
     getUsers({ cache: "no-store" })
       .then((data) => {
         if (!cancelled) setUsers(data);
@@ -76,17 +73,19 @@ export function AdminUsersView() {
     );
   }, [users, search]);
 
+    function retry() {
+    setUsers(null);
+    setError(null);
+    setAttempt((count) => count + 1);
+  }
+
   if (error) {
     return (
       <Alert variant="destructive">
         <AlertTitle>Could not load users</AlertTitle>
         <AlertDescription className="space-y-3">
           <p>{error}</p>
-          <Button
-            size="sm"
-            variant="outline"
-            onClick={() => setAttempt((count) => count + 1)}
-          >
+                    <Button size="sm" variant="outline" onClick={retry}>
             Try again
           </Button>
         </AlertDescription>

@@ -27,5 +27,5 @@ export default async function AdminUserDetailsPage({ params }: PageProps) {
     );
   }
 
-  return <AdminUserDetails id={id} />;
+    return <AdminUserDetails key={id} id={id} />;
 }
