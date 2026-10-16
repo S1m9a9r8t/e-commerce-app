@@ -120,8 +120,8 @@ Public GET responses are cached for 60 seconds. Admin pages and anything with a 
 The API gives users a `role` field, and the course provides a demo admin account whose role is `admin`. The dashboard checks that role in the browser:
 
 - Accounts with the role `admin` can open `/admin`.
-- Other accounts see "Access denied". For local demonstration only, `NEXT_PUBLIC_ADMIN_DEMO_MODE=true` lets any logged-in user in, with a visible "Development-only access" banner.
-- Demo admin account (public sample from the course announcement): `admin@mail.com` / `admin123`
+- Other accounts see "Access denied". 
+- Demo admin account : `admin@mail.com` / `admin123`
 
 These checks run in the browser, so they can be bypassed. In my testing, the API also accepted product and category creation from an account with the `customer` role, so it does not appear to enforce roles on the server. A real application must check permissions on the server.
 
