@@ -18,6 +18,7 @@ import { Label } from "@/components/ui/label";
 import { useAuth } from "@/context/auth-context";
 import { ApiError } from "@/lib/api/client";
 import { getSafeRedirect } from "@/lib/utils";
+import { FormField } from "@/components/shared/form-field";
 
 export function LoginForm() {
   const router = useRouter();
@@ -136,23 +137,15 @@ export function LoginForm() {
             )}
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="password">Password</Label>
-            <Input
-              id="password"
-              type="password"
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              aria-invalid={!!errors.password}
-              aria-describedby={errors.password ? "password-error" : undefined}
-            />
-            {errors.password && (
-              <p id="password-error" className="text-sm text-destructive">
-                {errors.password}
-              </p>
-            )}
-          </div>
+            <FormField
+            id="password"
+            label="Password"
+            type="password"
+            autoComplete="current-password"
+            value={password}
+            onChange={setPassword}
+            error={errors.password}
+          />
         </CardContent>
 
         <CardFooter className="mt-6 flex-col gap-4">

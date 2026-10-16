@@ -14,6 +14,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/context/auth-context";
 import { cleanImageUrl } from "@/lib/utils";
+const DEMO_MODE = process.env.NEXT_PUBLIC_ADMIN_DEMO_MODE === "true";
+
+function canOpenAdmin(role: string) {
+  return role === "admin" || DEMO_MODE;
+}
 
 export function getInitials(name: string) {
   return (
@@ -75,6 +80,11 @@ export function UserMenu() {
         <DropdownMenuItem asChild>
           <Link href="/profile">Profile</Link>
         </DropdownMenuItem>
+                {canOpenAdmin(user.role) && (
+          <DropdownMenuItem asChild>
+            <Link href="/admin">Admin dashboard</Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuItem onClick={handleLogout}>Log out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
@@ -108,6 +118,16 @@ export function MobileAuthButtons({ onNavigate }: { onNavigate: () => void }) {
       >
         Profile
       </Link>
+
+            {canOpenAdmin(user.role) && (
+        <Link
+          href="/admin"
+          onClick={onNavigate}
+          className="block rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
+        >
+          Admin dashboard
+        </Link>
+      )}
       <Button
         variant="outline"
         className="w-full"

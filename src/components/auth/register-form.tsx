@@ -13,8 +13,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { FormField } from "@/components/shared/form-field";
 import { registerUser } from "@/lib/api/auth";
 import { ApiError } from "@/lib/api/client";
 import { getSafeRedirect } from "@/lib/utils";
@@ -27,46 +26,6 @@ interface FormErrors {
   email?: string;
   password?: string;
   confirmPassword?: string;
-}
-
-interface FieldProps {
-  id: string;
-  label: string;
-  type?: string;
-  value: string;
-  onChange: (value: string) => void;
-  error?: string;
-  autoComplete?: string;
-}
-
-function Field({
-  id,
-  label,
-  type = "text",
-  value,
-  onChange,
-  error,
-  autoComplete,
-}: FieldProps) {
-  return (
-    <div className="space-y-2">
-      <Label htmlFor={id}>{label}</Label>
-      <Input
-        id={id}
-        type={type}
-        autoComplete={autoComplete}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-        aria-invalid={!!error}
-        aria-describedby={error ? `${id}-error` : undefined}
-      />
-      {error && (
-        <p id={`${id}-error`} className="text-sm text-destructive">
-          {error}
-        </p>
-      )}
-    </div>
-  );
 }
 
 export function RegisterForm() {
@@ -110,7 +69,7 @@ export function RegisterForm() {
     return next;
   }
 
-    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (isSubmitting) return;
 
@@ -171,7 +130,7 @@ export function RegisterForm() {
             </Alert>
           )}
 
-          <Field
+          <FormField
             id="name"
             label="Name"
             autoComplete="name"
@@ -179,7 +138,7 @@ export function RegisterForm() {
             onChange={setName}
             error={errors.name}
           />
-          <Field
+          <FormField
             id="email"
             label="Email"
             type="email"
@@ -188,7 +147,7 @@ export function RegisterForm() {
             onChange={setEmail}
             error={errors.email}
           />
-          <Field
+          <FormField
             id="password"
             label="Password"
             type="password"
@@ -197,7 +156,7 @@ export function RegisterForm() {
             onChange={setPassword}
             error={errors.password}
           />
-          <Field
+          <FormField
             id="confirm-password"
             label="Confirm password"
             type="password"
